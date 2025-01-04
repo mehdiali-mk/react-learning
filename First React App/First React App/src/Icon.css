@@ -1,0 +1,26 @@
+.icon {
+  padding: 2rem;
+  width: 2rem;
+  height: 2rem;
+  background-color: #242424;
+  color: #f7d71e;
+  border-radius: 10rem;
+  -webkit-border-radius: 10rem;
+  -moz-border-radius: 10rem;
+  -ms-border-radius: 10rem;
+  -o-border-radius: 10rem;
+  position: relative;
+}
+
+.icon-name {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  font-size: 1.6rem;
+  font-weight: bold;
+  transform: translate(-50%, -50%);
+  -webkit-transform: translate(-50%, -50%);
+  -moz-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  -o-transform: translate(-50%, -50%);
+}

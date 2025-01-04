@@ -1,0 +1,13 @@
+.counter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  flex-direction: column;
+  font-size: 3rem;
+  margin-top: 1.2rem;
+}
+
+.like-button {
+  cursor: pointer;
+}

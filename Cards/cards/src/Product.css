@@ -1,0 +1,28 @@
+.product {
+  width: 18rem;
+  height: 16rem;
+  /* background-color: #fff; */
+  background: rgb(2, 0, 36);
+  background: linear-gradient(
+    180deg,
+    rgba(2, 0, 36, 1) 0%,
+    rgba(26, 179, 255, 1) 0%,
+    rgba(255, 255, 255, 1) 100%
+  );
+  /* background: rgb(24, 132, 141);
+  background: linear-gradient(
+    180deg,
+    rgba(24, 132, 141, 1) 29%,
+    rgba(255, 255, 255, 1) 100%
+  ); */
+
+  border-radius: 1rem;
+  -webkit-border-radius: 1rem;
+  -moz-border-radius: 1rem;
+  -ms-border-radius: 1rem;
+  -o-border-radius: 1rem;
+  display: flex;
+  align-items: start;
+  justify-content: space-between;
+  flex-direction: column;
+}

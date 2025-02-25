@@ -19,6 +19,10 @@ function App() {
     );
   }
 
+  function handleClearItem() {
+    setItems([]);
+  }
+
   return (
     <div className="app">
       <Logo />
@@ -27,6 +31,7 @@ function App() {
         initialItems={items}
         handleDeleteItems={handleDeleteItems}
         handleToggleItem={handleToggleItem}
+        handleClearItem={handleClearItem}
       />
       <Stats items={items} />
     </div>
@@ -85,12 +90,32 @@ function Form({ handleItems }) {
   );
 }
 
-function PackingList({ initialItems, handleDeleteItems, handleToggleItem }) {
-  console.log(initialItems);
+function PackingList({
+  initialItems,
+  handleDeleteItems,
+  handleToggleItem,
+  handleClearItem,
+}) {
+  const [sortMethod, setSortMethod] = useState("input");
+
+  let sortedItems;
+
+  if (sortMethod === "input") sortedItems = initialItems;
+
+  if (sortMethod === "description") {
+    sortedItems = [...initialItems].sort((a, b) =>
+      a.description.localeCompare(b.description)
+    );
+  }
+
+  if (sortMethod === "packed") {
+    sortedItems = [...initialItems].sort((a, b) => a.packed - b.packed);
+  }
+
   return (
     <div className="list">
       <ul>
-        {initialItems.map((item) => (
+        {sortedItems.map((item) => (
           <Item
             item={item}
             key={item.id}
@@ -99,6 +124,20 @@ function PackingList({ initialItems, handleDeleteItems, handleToggleItem }) {
           />
         ))}
       </ul>
+
+      <div className="actions">
+        <select
+          value={sortMethod}
+          onChange={(event) => {
+            setSortMethod(event.target.value);
+          }}
+        >
+          <option value="input">Input order</option>
+          <option value="description">Description</option>
+          <option value="packed">Packed Status</option>
+        </select>
+        <button onClick={handleClearItem}>Clear</button>
+      </div>
     </div>
   );
 }

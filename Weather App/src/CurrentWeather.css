@@ -1,0 +1,27 @@
+.current-weather {
+  width: 50%;
+  margin-top: 5.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.current-weather-info {
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2.4rem;
+}
+
+.weather-icon {
+  font-size: 13rem;
+  color: #f7d71e;
+}
+
+.temperature {
+  display: flex;
+  align-items: end;
+  justify-content: end;
+  gap: 3.6rem;
+}

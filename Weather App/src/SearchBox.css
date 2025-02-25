@@ -1,0 +1,14 @@
+.search-box {
+  width: 50%;
+  background-color: #202b3b;
+  color: #fff;
+  outline: none;
+  border: none;
+  font-size: 1.8rem;
+  padding: 1.2rem 1.2rem;
+  border-radius: 1rem;
+  -webkit-border-radius: 1rem;
+  -moz-border-radius: 1rem;
+  -ms-border-radius: 1rem;
+  -o-border-radius: 1rem;
+}

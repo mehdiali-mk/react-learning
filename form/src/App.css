@@ -1,0 +1,43 @@
+.background {
+  width: 100vw;
+  margin-top: 6rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.form {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.text-input {
+  font-size: 2.4rem;
+  background-color: #191825;
+  border: 0.4rem solid #fff;
+  border-radius: 10rem;
+  -webkit-border-radius: 10rem;
+  -moz-border-radius: 10rem;
+  -ms-border-radius: 10rem;
+  -o-border-radius: 10rem;
+  color: #fff;
+  padding: 0.6rem 1.2rem;
+}
+
+.button {
+  background-color: #f7d71e;
+  color: #191825;
+  font-size: 1.6rem;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  outline: none;
+  font-weight: bold;
+  border-radius: 10rem;
+  -webkit-border-radius: 10rem;
+  -moz-border-radius: 10rem;
+  -ms-border-radius: 10rem;
+  -o-border-radius: 10rem;
+}

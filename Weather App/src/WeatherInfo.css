@@ -1,0 +1,17 @@
+.weather-info {
+  display: flex;
+  align-items: start;
+  justify-content: start;
+  flex-direction: row;
+  gap: 1rem;
+}
+
+.icon {
+  font-size: 2rem;
+  color: #fff;
+}
+
+.value {
+  font-size: 2rem;
+  color: #fff;
+}

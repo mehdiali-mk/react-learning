@@ -1,0 +1,14 @@
+.button {
+  font-size: 3rem;
+  font-weight: bold;
+  background-color: #f7d71e;
+  color: #191825;
+  display: inline;
+  padding: 0.8rem 1.6rem;
+  border-radius: 10rem;
+  -webkit-border-radius: 10rem;
+  -moz-border-radius: 10rem;
+  -ms-border-radius: 10rem;
+  -o-border-radius: 10rem;
+  cursor: pointer;
+}

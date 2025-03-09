@@ -6,7 +6,7 @@ import StarComponent from "./star.jsx";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    {/* <App /> */}
-    <StarComponent />
+    <App />
+    {/* <StarComponent /> */}
   </StrictMode>
 );

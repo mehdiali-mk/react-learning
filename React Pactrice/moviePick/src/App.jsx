@@ -1,5 +1,8 @@
 import { useEffect, useRef, useState } from "react";
 import StarRating from "./starRating";
+import { useMovie } from "./useMovie";
+import { useLocalStorage } from "./useLocalStorage";
+import { useKey } from "./useKey";
 
 const tempMovieData = [
   {
@@ -55,15 +58,11 @@ const apiKey = "6aecaa87";
 
 export default function App() {
   const [query, setQuery] = useState("");
-  const [movies, setMovies] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
-  const [error, setError] = useState("");
   const [selectedId, setSelectedId] = useState(null);
-  const [watched, setWatched] = useState(function () {
-    const storageData = localStorage.getItem("watched");
-    console.log(storageData);
-    return JSON.parse(storageData);
-  });
+
+  const { movies, isLoading, error } = useMovie(query);
+
+  const [watched, setWatched] = useLocalStorage([], "watched");
 
   function handleSelectedId(id) {
     setSelectedId((currentId) => (currentId === id ? null : id));
@@ -80,64 +79,6 @@ export default function App() {
   function handleDeleteWatched(id) {
     setWatched((movies) => movies.filter((movie) => movie.imdbID !== id));
   }
-
-  useEffect(
-    function () {
-      localStorage.setItem("watched", JSON.stringify(watched));
-    },
-    [watched]
-  );
-
-  useEffect(
-    function () {
-      const controller = new AbortController();
-
-      async function fetchMovies() {
-        try {
-          setIsLoading(true);
-          setError("");
-          const response = await fetch(
-            `https://www.omdbapi.com/?apikey=${apiKey}&s=${query}`,
-            { signal: controller.signal }
-          );
-
-          if (!response.ok) {
-            throw new Error("Something Went Wrong with fetching movies.");
-          }
-          const data = await response.json();
-
-          // console.log(typeof data.Response);
-          if (data.Response == "False") {
-            setError("Movie not found.");
-            // throw new Error("Movie not found");
-          }
-
-          setMovies(data.Search);
-        } catch (err) {
-          console.log(err.message);
-          if (err.name !== "AbortError") {
-            setError(err.message);
-          }
-        } finally {
-          setIsLoading(false);
-        }
-      }
-      console.log(query);
-      if (query.length < 3) {
-        setMovies([]);
-        setError("");
-        return;
-      }
-
-      onCloseMovie();
-      fetchMovies();
-
-      return function cleanup() {
-        controller.abort();
-      };
-    },
-    [query]
-  );
 
   return (
     <>
@@ -206,24 +147,31 @@ function Logo() {
 function Search({ query, setQuery }) {
   const searchInputEl = useRef(null);
 
-  useEffect(
-    function () {
-      const callback = (event) => {
-        if (document.activeElement === searchInputEl.current) return;
+  useKey("Enter", () => {
+    if (document.activeElement === searchInputEl.current) return;
 
-        if (event.key === "Enter") {
-          searchInputEl.current.focus();
-          setQuery("");
-        }
-      };
+    searchInputEl.current.focus();
+    setQuery("");
+  });
 
-      document.addEventListener("keydown", callback);
-      searchInputEl.current.focus();
+  // useEffect(
+  //   function () {
+  //     const callback = (event) => {
+  //       if (document.activeElement === searchInputEl.current) return;
 
-      return () => document.addEventListener("keydown", callback);
-    },
-    [setQuery]
-  );
+  //       if (event.key === "Enter") {
+  //         searchInputEl.current.focus();
+  //         setQuery("");
+  //       }
+  //     };
+
+  //     document.addEventListener("keydown", callback);
+  //     searchInputEl.current.focus();
+
+  //     return () => document.addEventListener("keydown", callback);
+  //   },
+  //   [setQuery]
+  // );
 
   return (
     <input
@@ -384,22 +332,24 @@ function MovieDetails({ selectedId, onCloseMovie, addWatchedMovie, watched }) {
     onCloseMovie();
   }
 
-  useEffect(
-    function () {
-      function callbackForEventListener(event) {
-        if (event.code === "Escape") {
-          onCloseMovie();
-        }
-      }
+  useKey("Escape", onCloseMovie);
 
-      document.addEventListener("keydown", callbackForEventListener);
+  // useEffect(
+  //   function () {
+  //     function callbackForEventListener(event) {
+  //       if (event.code === "Escape") {
+  //         onCloseMovie();
+  //       }
+  //     }
 
-      return function () {
-        document.removeEventListener("keydown", callbackForEventListener);
-      };
-    },
-    [onCloseMovie]
-  );
+  //     document.addEventListener("keydown", callbackForEventListener);
+
+  //     return function () {
+  //       document.removeEventListener("keydown", callbackForEventListener);
+  //     };
+  //   },
+  //   [onCloseMovie]
+  // );
 
   useEffect(
     function () {

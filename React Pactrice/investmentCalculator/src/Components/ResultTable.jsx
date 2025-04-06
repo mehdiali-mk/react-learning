@@ -1,6 +1,15 @@
 import classes from "./ResultTable.module.css";
 
-function ResultTable() {
+function ResultTable({ yearlyCalculatedData, initialInvestment }) {
+  const formatCurrency = new Intl.NumberFormat("en-IN", {
+    style: "currency",
+    currency: "INR",
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  });
+
+  console.log(yearlyCalculatedData);
+
   return (
     <table className={classes.result}>
       <thead>
@@ -13,13 +22,25 @@ function ResultTable() {
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>YEAR NUMBER</td>
-          <td>TOTAL SAVINGS END OF YEAR</td>
-          <td>INTEREST GAINED IN YEAR</td>
-          <td>TOTAL INTEREST GAINED</td>
-          <td>TOTAL INVESTED CAPITAL</td>
-        </tr>
+        {yearlyCalculatedData.map((yearData) => (
+          <tr>
+            <td>{yearData.year}</td>
+            <td>{formatCurrency.format(yearData.savingsEndOfYear)}</td>
+            <td>{formatCurrency.format(yearData.yearlyInterest)}</td>
+            <td>
+              {formatCurrency.format(
+                yearData.savingsEndOfYear -
+                  initialInvestment -
+                  yearData.yearlyContribution * yearData.year
+              )}
+            </td>
+            <td>
+              {formatCurrency.format(
+                initialInvestment + yearData.yearlyContribution * yearData.year
+              )}
+            </td>
+          </tr>
+        ))}
       </tbody>
     </table>
   );

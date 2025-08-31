@@ -1,12 +1,9 @@
+/* 
+//* Context API
 import React, { createContext } from "react";
 import ComponentA from "./Components/ComponentA.jsx";
 
-export const Data = createContext();
-export const Data1 = createContext();
-
 export default function App() {
-  const name = "Mehdiali";
-  const age = 19;
 
   return (
     <div>
@@ -15,6 +12,22 @@ export default function App() {
           <ComponentA />
         </Data1.Provider>
       </Data.Provider>
+    </div>
+  );
+}
+*/
+
+import { UserProvider } from "./UserContext";
+import UserProfile from "./UserComponent/UserProfile.jsx";
+import ChangeUserProfile from "./UserComponent/ChangeUserProfile.jsx";
+
+export default function App() {
+  return (
+    <div>
+      <UserProvider>
+        <UserProfile />
+        <ChangeUserProfile />
+      </UserProvider>
     </div>
   );
 }

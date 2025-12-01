@@ -1,0 +1,28 @@
+.container {
+  width: 99vw;
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.6rem;
+  margin-top: 2.4rem;
+}
+
+.handler {
+  display: flex;
+  gap: 1.2rem;
+}
+
+.reset {
+  margin-top: 1.2rem;
+}
+
+.reset Button {
+  font-size: 1.2rem;
+  padding: 0.5rem 1rem;
+}
+
+Button {
+  cursor: pointer;
+}
